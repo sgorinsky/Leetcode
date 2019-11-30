@@ -1,6 +1,6 @@
 class Solution:
     def myPow(self, x: float, n: int) -> float:
-        if x < -100 or x > 100 or n < -2**31 or n >= 2**31:
+        if x < -100 or x > 100 or n < -2147483648-1 or n >= 2147483648:
             return 0
         elif n == 0 or x == 1:
             return 1

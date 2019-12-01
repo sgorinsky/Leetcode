@@ -15,4 +15,23 @@ class Solution:
             return triangle
         return pascalsTriangle(numRows, 1)
                 
+class AnotherSolution:
+    memo = {(0,0): 1, (1,0): 1, (1,1):1}
+    def generate(self, numRows: int) -> List[List[int]]:
+        if numRows <= 0:
+            return []
+        def getEntry(row, column):
+            if (row, column) in self.memo:
+                return self.memo[(row, column)]
+            elif column == 0 or column == row:
+                return 1
+            else:
+                self.memo[(row, column)] = getEntry(row-1, column) + getEntry(row-1, column-1)
+                return self.memo[(row, column)]
         
+        triangle = []
+        row = 0
+        while numRows != row:
+            triangle.append([getEntry(row, col) for col in range(row+1)])
+            row += 1
+        return triangle        

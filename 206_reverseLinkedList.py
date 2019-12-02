@@ -14,3 +14,10 @@ class Solution:
         current.next = None
         temp.next = current
         return before
+
+class AnotherSolution:
+    def reverseList(self, head: ListNode) -> ListNode:
+        prev, curr = None, head
+        while curr:
+            curr.next, prev, curr = prev, curr, curr.next
+        return prev

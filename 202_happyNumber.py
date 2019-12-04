@@ -5,7 +5,7 @@ class Solution:
         while original != 1:
             loop_set[original] = 1 if original not in loop_set else 2
             current = 0
-            if original == 0 or (original == n and count != 0) or loop_set[original] == 2:
+            if original == 0 or loop_set[original] == 2:
                 return False
             elif original == 1:
                 return True

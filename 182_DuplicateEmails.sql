@@ -1,2 +1,1 @@
-# Write your MySQL query statement below
-select email from (select email, count(*) from person group by email having count(email) > 1) as t1 ;
+SELECT email FROM (SELECT email, COUNT(*) FROM person GROUP BY email HAVING COUNT(email) > 1) as t1 ;

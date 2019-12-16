@@ -1,3 +1,3 @@
-SELECT customers.name as 'Customers'
-FROM customers
-WHERE customers.id NOT IN (SELECT customerid from orders);
+SELECT Customers.name as 'Customers'
+FROM Customers
+WHERE Customers.id NOT IN (SELECT customerid from orders);

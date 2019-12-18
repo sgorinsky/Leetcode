@@ -13,15 +13,15 @@ class Solution:
         combinations = set()
         if not digits:
             return combinations
-        def helper(current_str, current_digit, all_digits):
-            if len(current_str) == len(all_digits):
+        def helper(current_str, current_digit, max_length):
+            if len(current_str) == max_length:
                 combinations.add(current_str)
-            elif len(current_str) > len(all_digits):
+            elif len(current_str) > max_length:
                 pass
             else:
                 for i in self.phone_numbers[current_digit[0]]:
                     current_str += i
-                    helper(current_str, current_digit[1:], all_digits)
+                    helper(current_str, current_digit[1:], max_length)
                     current_str = current_str[:-1]
-        helper('', digits, digits)
+        helper('', digits, len(digits))
         return combinations

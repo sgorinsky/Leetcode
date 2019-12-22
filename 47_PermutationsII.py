@@ -9,6 +9,7 @@ class Solution:
                     total_set.append(current_set)
                     past_sets.add(tuplified_current_set)
             for i in range(len(current_nums)):
-                helper(current_nums[0:i]+current_nums[i+1:],current_set+[current_nums[i]], count+1)
+		if i == 0 or current_nums[i] != current_nums[i-1]:
+                    helper(current_nums[0:i]+current_nums[i+1:],current_set+[current_nums[i]])
             return total_set
         return helper(nums, [], 0)

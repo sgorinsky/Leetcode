@@ -17,4 +17,8 @@ class Solution:
             xor_value ^= num
         return xor_value
         
-        
+# one-liner
+import functools
+class Solution:
+    def singleNumber(self, nums: List[int]) -> int:
+        return functools.reduce(lambda x,y: x ^ y, nums)        

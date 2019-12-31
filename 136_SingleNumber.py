@@ -8,3 +8,13 @@ class Solution:
                 nums_set.remove(num)
         for num in nums_set:
             return num
+
+# better storage, simpler solution
+class Solution:
+    def singleNumber(self, nums: List[int]) -> int:
+        xor_value = 0
+        for num in nums:
+            xor_value ^= num
+        return xor_value
+        
+        

@@ -1,3 +1,4 @@
+# original solution using str split
 import re
 class Solution:
     def lengthOfLastWord(self, s: str) -> int:
@@ -12,6 +13,7 @@ class Solution:
         else:
             return len(split_string[-1])
 
+# no built-in methods
 class Solution:
     def lengthOfLastWord(self, s: str) -> int:
         i, s = 0, ' ' + s
@@ -26,3 +28,9 @@ class Solution:
             return j
         else:
             return 0
+
+# fast two-liner
+class Solution:
+    def lengthOfLastWord(self, s: str) -> int:
+        s = s.strip().split(' ')
+        return 0 if len(s) == 0 else len(s[-1])

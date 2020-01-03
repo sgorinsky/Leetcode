@@ -14,9 +14,6 @@ class Solution:
 
 class Solution:
     def lengthOfLastWord(self, s: str) -> int:
-        if not s:
-            return 0
-        
         i, s = 0, ' ' + s
         
         while s[-1-i] == ' ' and i < len(s)-1:

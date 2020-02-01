@@ -37,3 +37,27 @@ class Solution:
         return -1
                 
         
+class Solution:
+    def search(self, nums: List[int], target: int) -> int:
+        n = len(nums)
+        l, r = 0, n-1
+        while l <= r:
+            mid = l + (r - l)//2
+            if nums[mid] == target: return mid
+            if mid+1 < n and nums[mid+1] <= nums[r] : 
+                if nums[mid + 1] <= target <= nums[r]:
+                    l = mid + 1
+                    continue
+                else: 
+                    r = mid - 1
+                    continue
+            if mid-1 >= 0 and nums[l] <= nums[mid-1] : 
+                if nums[l] <= target <= nums[mid - 1]:
+                    r = mid - 1
+                    continue
+                else: 
+                    l = mid + 1
+                    continue
+            else: break
+        return -1
+        

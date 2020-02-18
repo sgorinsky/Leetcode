@@ -10,22 +10,19 @@ class Solution:
     def copyRandomList(self, head: 'Node') -> 'Node':
         if not head:
             return None
-
-        d = {}
-        curr = head
-
+        
+        curr, nodes = head, {}
         while curr:
-            d[curr] = Node(curr.val, None, None)
+            nodes[curr] = Node(curr.val, None, None)
             curr = curr.next
-
+        
         curr = head
-
         while curr:
             if curr.next != None:
-                d[curr].next = d[curr.next]
+                nodes[curr].next = nodes[curr.next]
             if curr.random != None:
-                d[curr].random = d[curr.random]
+                nodes[curr].random = nodes[curr.random]
             curr = curr.next
-        return d[head]
+        return nodes[head]
         
         

@@ -1,45 +1,37 @@
 class Solution:
     def exist(self, board: List[List[str]], word: str) -> bool:
-        if not board or not board[0] or not word:
-            return False
-        if len(word) > len(board)*len(board[0]):
-            return False
+        if not board or not board[0]: return False
         
-        m, n = len(board), len(board[0])
-        self.wl = [x for x in word]
-        self.visited = [[False for _ in range(n)] for _ in range(m)]
+        row_length, col_length = len(board), len(board[0])
+        self.visited = [[False for _ in range(col_length)] for _ in range(row_length)]
         
-        for i in range(m):
-            for j in range(n):
-                if self.helper(i, j, board, 0):
-                    return True
+        for i in range(row_length):
+            for j in range(col_length):
+                if self.check(i, j, word, board): return True
+        
         return False
     
-    def helper(self, i, j, matrix, idx):
-        m, n = len(self.visited), len(self.visited[0])
-        if idx == len(self.wl):
-            return True
-        elif idx == len(self.wl)-1:
-            return matrix[i][j] == self.wl[idx]
+    def check(self, row, col, word, board):
+        if not word: return True
+        elif len(word) == 1: return word[0] == board[row][col]
         else:
-            if matrix[i][j] == self.wl[idx]:
-                self.visited[i][j] = True
-				
-                # Search along four directioins
-                if i+1 < m and not self.visited[i+1][j]:
-                    if self.helper(i+1, j, matrix, idx+1):
-                        return True
-                if i-1 >= 0 and not self.visited[i-1][j]:
-                    if self.helper(i-1, j, matrix, idx+1):
-                        return True
-                if j+1 < n and not self.visited[i][j+1]:
-                    if self.helper(i, j+1, matrix, idx+1):
-                        return True
-                if j-1 >= 0 and not self.visited[i][j-1]:
-                    if self.helper(i, j-1, matrix, idx+1):
-                        return True
-						
-				#i, j is not a valid starting point
-                self.visited[i][j] = False                
-            else:
+            if board[row][col] == word[0]:
+                self.visited[row][col] = True
+                if row > 0 and not self.visited[row-1][col]:
+                    if self.check(row-1, col, word[1:], board): return True
+
+                if col > 0 and not self.visited[row][col-1]:
+                    if self.check(row, col-1, word[1:], board): return True
+
+                if row < len(board)-1 and not self.visited[row+1][col]:
+                    if self.check(row+1, col, word[1:], board): return True
+
+                if col < len(board[0])-1 and not self.visited[row][col+1]:
+                    if self.check(row, col+1, word[1:], board): return True
+                self.visited[row][col] = False
+                
+            else: 
+                self.visited[row][col] = False
                 return False
+            
+        

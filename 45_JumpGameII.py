@@ -1,14 +1,15 @@
 class Solution:
     def jump(self, nums: List[int]) -> int:
-        idx, count, end = 0, 1, len(nums)
-        while idx < end:
-            high, jump_idx = 0, 0
-            
-            for i in range(1, nums[idx]+1):
-                if idx+i+nums[idx+i] >= end: return count
-                elif nums[idx+i] + (i-idx) >= high:
-                    high = nums[idx+i] + (i-idx)
-                    jump_idx = idx + i
-            idx = jump_idx
-            count += 1
-        return count
+        if len(nums) <= 1: return 0
+        idx, count, length = 0, 0, len(nums)-1
+        
+        while idx < length:
+            furthest, next_idx = 0, 0
+            if nums[idx]+idx < length:
+                for i in range(1, nums[idx]+1):
+                    if nums[idx+i] + i >= furthest:
+                        furthest, next_idx = nums[idx+i]+i, idx+i
+                count += 1
+                idx = next_idx
+            else: return count+1
+        return countn

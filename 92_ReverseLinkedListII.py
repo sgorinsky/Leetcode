@@ -15,8 +15,7 @@ class Solution:
                     curr.next, prev, curr = prev, curr, curr.next
                     count += 1
                 if before: before.next, first.next = prev, curr
-                elif curr: head, first.next = prev, curr
-                else: return prev
+		else: head, first.next = prev, curr 
             if curr:
                 count += 1
                 prev, curr = curr, curr.next

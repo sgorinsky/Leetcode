@@ -10,7 +10,7 @@ class Solution:
             else: n //= 26
         return s
 
-# less checks
+# fewer checks
 class Solution:
     numbers = {0: 'Z'}
     for i in range(1, 27): numbers[i] = chr(64+i)

@@ -8,3 +8,5 @@ class Solution:
             if l not in letters_dict or letters_dict[l] == 0:
                 return l
             letters_dict[l] -= 1
+
+	return ''

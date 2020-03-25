@@ -14,3 +14,16 @@ class Solution:
             else:
                 nums_set.add(n)
         return -1
+
+# Floyd's Tortoise and Hare algorithm for Cycle Detection
+class Solution:
+    def findDuplicate(self, nums: List[int]) -> int:
+        tortoise, hare = nums[0], nums[nums[0]]
+        while tortoise != hare:
+            tortoise, hare = nums[tortoise], nums[nums[hare]]
+        
+        tortoise = 0
+        while tortoise != hare:
+            tortoise, hare = nums[tortoise], nums[hare]
+            
+        return tortoise

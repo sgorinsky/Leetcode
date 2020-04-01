@@ -34,3 +34,10 @@ class Solution:
         inner = height * width
         
         return rect_A + rect_B - inner
+
+# smaller solution
+class Solution:
+    def computeArea(self, A: int, B: int, C: int, D: int, E: int, F: int, G: int, H: int) -> int:
+        height, width = min(H, D) - max(B, F), min(G, C) - max(E, A)
+        innerArea = height * width if height > 0 and width > 0 else 0
+        return (D-B)*(C-A) + (H-F)*(G-E) - innerArea

@@ -1,3 +1,19 @@
+# recent solution for 30 day leetcode challenge e
+class Solution:
+    def isHappy(self, n: int) -> bool:
+        if n < 0: return False
+        
+        prior_nums = set()
+        while n != 1:
+            curr = 0
+            while n != 0:
+                curr += (n % 10)**2
+                n //= 10
+            n = curr
+            if n in prior_nums: return False
+            prior_nums.add(n)
+        return True
+
 class Solution:
     def isHappy(self, n: int) -> bool:
         original, count = n, 0

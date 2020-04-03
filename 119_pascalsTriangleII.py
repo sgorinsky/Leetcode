@@ -1,3 +1,23 @@
+# more recent solution is more concise
+class Solution:
+    cache = {(0,0): 1, (1,0): 1, (1,1):1}
+    def getRow(self, rowIndex: int) -> List[int]:
+        def helper(row, col):
+            if (row, col) in self.cache or (col, row) in self.cache:
+                return self.cache[(row, col)]
+            else:
+                if col == 0 or col == row:
+                    self.cache[(row, col)] = 1
+                    return 1
+                else:
+                    self.cache[(row, col)] = helper(row-1, col) + helper(row-1, col-1)
+                    return self.cache[(row, col)]
+        res = []
+        for i in range(rowIndex+1):
+            res.append(helper(rowIndex, i))
+        return res
+
+# less recent solution
 class Solution:
     memo = {(0,0): 1, (1,0): 1, (1,1):1}
     def getRow(self, rowIndex: int) -> List[int]:

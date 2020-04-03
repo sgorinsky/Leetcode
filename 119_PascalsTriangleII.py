@@ -3,7 +3,7 @@ class Solution:
     cache = {(0,0): 1, (1,0): 1, (1,1):1}
     def getRow(self, rowIndex: int) -> List[int]:
         def helper(row, col):
-            if (row, col) in self.cache or (col, row) in self.cache:
+            if (row, col) in self.cache: 
                 return self.cache[(row, col)]
             else:
                 if col == 0 or col == row:

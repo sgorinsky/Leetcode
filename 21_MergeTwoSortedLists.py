@@ -45,3 +45,15 @@ class Solution:
                 l1, l2 = l2, l1
             l1.next = self.mergeTwoLists(l1.next, l2)
         return l1 or l2
+
+# retry problem 4/6/2020
+class Solution:
+    def mergeTwoLists(self, l1: ListNode, l2: ListNode) -> ListNode:
+        if not (l1 and l2):
+            return l1 or l2
+        if l1.val > l2.val:
+	    # instead of recursively calling mergeTwoLists, can switch l1 and l2
+	    # 	ie. l1, l2 = l2, l1 
+            return self.mergeTwoLists(l2, l1) 
+        l1.next = self.mergeTwoLists(l1.next, l2)
+        return l1

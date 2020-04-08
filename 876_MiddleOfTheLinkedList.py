@@ -12,3 +12,12 @@ class Solution:
             nodes[count], curr = curr, curr.next
             count += 1
         return nodes[count//2]
+
+# A solution with O(1) space --> no hashtable
+class Solution:
+    def middleNode(self, head: ListNode) -> ListNode:
+        nodes = {}
+        slow, fast = head, head
+        while fast and fast.next:
+            slow, fast = slow.next, fast.next.next
+        return slow

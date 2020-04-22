@@ -5,6 +5,26 @@
 #         self.left = None
 #         self.right = None
 
+# O(N) recursive solution that evalutates left and right child candidacy of entry by comparing val to parent and grandparent
+class Solution:
+    def bstFromPreorder(self, preorder: List[int]) -> TreeNode:
+        if not preorder: return None
+        
+        self.idx = 0
+        def helper(idx, limit):
+            if idx == len(preorder) or preorder[idx] > limit:
+                return None
+            
+            root = TreeNode(preorder[idx])
+            self.idx += 1
+
+            root.left = helper(self.idx, root.val)
+            root.right = helper(self.idx, limit)
+
+            return root
+        
+        return helper(self.idx, float('inf'))
+
 class Solution:
     def bstFromPreorder(self, preorder: List[int]) -> TreeNode:
         if not preorder: return None

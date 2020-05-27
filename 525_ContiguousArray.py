@@ -1,3 +1,4 @@
+# counts as keys, indices as values
 class Solution:
     def findMaxLength(self, nums: List[int]) -> int:
         count = high = 0

@@ -1,5 +1,19 @@
 class Solution:
     def singleNumber(self, nums: List[int]) -> int:
+        cands, counts = set(), set()
+        for n in nums:
+            if n not in counts:
+                cands.add(n)
+                counts.add(n)
+            else:
+                if n in cands:
+                    cands.remove(n)
+        
+        for n in cands:
+            return n
+               
+ class Solution:
+    def singleNumber(self, nums: List[int]) -> int:
         past_nums, candidates = set(), set()
         for n in nums:
             if n not in past_nums:

@@ -6,13 +6,9 @@
 #         self.right = right
 class Solution:
     def countNodes(self, root: TreeNode) -> int:
-        def traverse(node):
-            if not node:
-                return 0
-            
-            return 1 + traverse(node.left) + traverse(node.right)
-        
-        return traverse(root)
+        if not root:
+            return 0
+        return 1 + self.countNodes(root.left) + self.countNodes(root.right)
 
 # Definition for a binary tree node.
 # class TreeNode:

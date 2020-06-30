@@ -12,28 +12,32 @@ class Solution:
                 settify_words.add(curr_word)
 
                 
-        def helper(row, col, curr='', visited=[]):
-            visited[row][col] = True
-            if curr in full_words:
-                return [curr]
-            elif curr not in settify_words:
-                return []
-            
+        def helper(row, col, curr='', visited=set()):
+            visited.add((row, col))
             res = []
-            if len(board)-1 > row and curr + board[row+1][col] in settify_words and not visited[row+1][col]:
+            if curr in full_words:
+                res += [curr]
+            elif curr not in settify_words:
+                return []         
+            
+            if len(board)-1 > row and curr + board[row+1][col] in settify_words and (row+1, col) not in visited:
                 res += helper(row+1, col, curr+board[row+1][col], visited)
-            if len(board[0])-1 > col and curr + board[row][col+1] in settify_words and not visited[row][col+1]:
+                visited.remove((row+1, col))
+            if len(board[0])-1 > col and curr + board[row][col+1] in settify_words and (row, col+1) not in visited:
                 res += helper(row, col+1, curr+board[row][col+1], visited)
-            if row > 0 and curr + board[row-1][col] in settify_words and not visited[row-1][col]:
+                visited.remove((row, col+1))
+            if row > 0 and curr + board[row-1][col] in settify_words and (row-1, col) not in visited:
                 res += helper(row-1, col, curr+board[row-1][col], visited)
-            if col > 0 and curr + board[row][col-1] in settify_words and not visited[row][col-1]:
+                visited.remove((row-1, col))
+            if col > 0 and curr + board[row][col-1] in settify_words and (row, col-1) not in visited:
                 res += helper(row, col-1, curr+board[row][col-1], visited)
+                visited.remove((row, col-1))
             return res
             
         ans = []
         for i in range(len(board)):
             for j in range(len(board[0])):
-                visited=[[False for _ in range(len(board[0]))] for _ in range(len(board))]
-                ans += helper(i, j, board[i][j], visited)
+                # visited=[[False for _ in range(len(board[0]))] for _ in range(len(board))]
+                ans += helper(i, j, board[i][j], set())
                 
         return set(ans)

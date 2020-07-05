@@ -1,5 +1,9 @@
 class Solution:
     def hammingDistance(self, x: int, y: int) -> int:
+        return str.count(bin(x^y), '1')
+
+class Solution:
+    def hammingDistance(self, x: int, y: int) -> int:
         x, y = bin(x)[2:], bin(y)[2:]
         
         if len(x) < len(y):

@@ -14,12 +14,7 @@ public:
         vector<int> dimensions = binaryMatrix.dimensions();
         int leftMost = -1;
         for (int i = 0; i < dimensions[0]; ++i) {
-            int j;
-            if (leftMost == -1) {
-                j = dimensions[1]-1;
-            } else {
-                j = leftMost;
-            }
+            int j = leftMost == -1 ? dimensions[1]-1 : leftMost;
             while (j >= 0 && binaryMatrix.get(i, j) == 1) {
                 leftMost = j;
                 --j;

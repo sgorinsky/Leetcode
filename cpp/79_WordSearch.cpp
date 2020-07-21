@@ -31,11 +31,11 @@ public:
     bool check(int i, int j, int idx, vector<vector<char>>& board, string word) {
         if (this->visited[i][j] || board[i][j] != word[idx]) {
             return false;
-        } else if (idx == word.length()-1 and board[i][j] == word[idx]) {
+        } else if (idx == word.length()-1 && board[i][j] == word[idx]) {
             this->isPossible = true;
             return true;
         }
-        if (!this->visited[i][j] and !this->isPossible) {
+        if (!this->visited[i][j] && !this->isPossible) {
             this->visited[i][j] = true;
             if (i > 0 && board[i-1][j] == word[idx+1]) {
                 check(i-1, j, idx+1, board, word);

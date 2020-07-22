@@ -6,6 +6,29 @@
 #         self.right = right
 class Solution:
     def levelOrderBottom(self, root: TreeNode) -> List[List[int]]:
+        if not root:
+            return []
+        levels = {}
+        self.deepest_level = 0
+        def traverseTree(node, lvl):
+            if not node:
+                return None
+            self.deepest_level = max(self.deepest_level, lvl)
+            levels[lvl] = levels[lvl] + [node.val] if lvl in levels else [node.val]
+            
+            return traverseTree(node.left, lvl+1) or traverseTree(node.right, lvl+1)
+        
+        traverseTree(root, 0)
+        return [levels[lvl] for lvl in range(self.deepest_level,-1,-1)] 
+
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def levelOrderBottom(self, root: TreeNode) -> List[List[int]]:
         self.levels = 0
         def countLevels(node, level):
             if not node:

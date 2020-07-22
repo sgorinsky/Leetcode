@@ -7,8 +7,7 @@ public:
         
         while (idx < A.size() && A[idx] < 0) {
             neg_stack.push_back(A[idx]*A[idx]);
-            ++idx; 
-            ++num_negs;
+            ++idx, ++num_negs;
         }
 
         vector<int> res;

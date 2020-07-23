@@ -1,6 +1,19 @@
 class Solution {
 public:
     vector<int> singleNumber(vector<int>& nums) {
+        int bitmask = 0;
+        for (int n : nums) bitmask ^= n;
+        
+        int x = 0, diff = bitmask & (-bitmask);
+        for (int n : nums) if ((n & diff) == 0) x ^= n;
+        
+        return {x, x^bitmask};
+    }
+};
+
+class Solution {
+public:
+    vector<int> singleNumber(vector<int>& nums) {
         vector<int> res = {};
         unordered_map<int, int> num_counts;
         

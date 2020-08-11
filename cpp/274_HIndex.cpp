@@ -9,12 +9,10 @@ public:
         int h = 0;
         for (int i = 0; i < N; ++i) {
             int cand = citations[i];
-            if (cand >= i) {
-                if (N-cand >= i) {
-                    h = max(cand, h);
-                }
+            if (N-cand >= i) {
+                h = max(cand, h);
             }
-            if (N-i <= cand) {
+		    if (N-i <= cand) {
                 h = max(N-i, h);
             }
             

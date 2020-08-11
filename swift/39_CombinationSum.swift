@@ -1,7 +1,6 @@
 class Solution {
     func combinationSum(_ candidates: [Int], _ target: Int) -> [[Int]] {
         var results = [[Int]]() 
-        var candidates = candidates.sorted() 
         
         func helper(_ curr: inout [Int], _ idx: Int, _ sum: Int) -> [[Int]] {
             if sum == target {

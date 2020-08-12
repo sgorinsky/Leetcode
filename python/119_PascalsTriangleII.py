@@ -1,3 +1,20 @@
+class Solution:
+    cache = {(0, 0): 1, (1,0): 1}
+    def getRow(self, rowIndex: int) -> List[int]:
+        def helper(i, j):
+            if (i, j) in self.cache:
+                return self.cache[(i, j)]
+            elif (i, i-j) in self.cache:
+                return self.cache[(i, i-j)]
+            else:
+                if j == i or j == 0:
+                    self.cache[(i, j)] = 1
+                    return self.cache[(i, j)]
+                self.cache[(i, j)] = helper(i-1, j-1) + helper(i-1, j)
+                return self.cache[(i, j)]
+        
+        return [helper(rowIndex, col) for col in range(rowIndex+1)]
+
 # more recent solution is more concise
 class Solution:
     cache = {(0,0): 1, (1,0): 1, (1,1):1}

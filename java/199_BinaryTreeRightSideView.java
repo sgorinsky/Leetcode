@@ -14,6 +14,32 @@
  * }
  */
 class Solution {
+    public List<Integer> rightSideView(TreeNode root) {
+        List<Integer> res = new ArrayList<Integer>();
+        if (root == null) return res;
+        
+        ArrayDeque<TreeNode> queue = new ArrayDeque() {{ offer(root); }};
+        
+        while (!queue.isEmpty()) {
+            int levelLength = queue.size();
+            
+            for (int i = 0; i < levelLength; ++i) {
+                TreeNode node = queue.poll();
+                if (i == levelLength - 1)
+                    res.add(node.val);
+                
+                if (node.left != null)
+                    queue.offer(node.left);
+                
+                if (node.right != null)
+                    queue.offer(node.right);
+            }
+        }
+        return res;
+    }
+}
+
+class Solution {
     List<Integer> res;
     public List<Integer> rightSideView(TreeNode root) {
         res = new ArrayList<Integer>();

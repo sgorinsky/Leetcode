@@ -1,15 +1,9 @@
 class Solution {
-    private class IntervalComparator implements Comparator<int[]> {
-        @Override
-        public int compare(int[] a, int[] b) {
-            return a[1] < b[1] ? -1 : 1;
-        }
-    }
     public int eraseOverlapIntervals(int[][] intervals) {
         if (intervals.length == 0)
             return 0;
         
-        Arrays.sort(intervals, new IntervalComparator());
+        Arrays.sort(intervals, (a, b) -> a[1] - b[1]) 
         int[] prev = intervals[0];
         int count = 0;
         

@@ -1,10 +1,9 @@
 class Solution {
     func eraseOverlapIntervals(_ intervals: [[Int]]) -> Int {
         if intervals.count == 0 { return 0 }
-        var sortedIntervals: [[Int]] = intervals // since intervals is let const
-        sortedIntervals.sort(by: {
+        var sortedIntervals: [[Int]] = intervals.sorted(by: {
             $0[1] < $1[1]
-        })
+        }) // sorted method is not in-place
         
         var currIdx = sortedIntervals.index(sortedIntervals.startIndex, offsetBy: 0)
         var prev: [Int] = sortedIntervals[currIdx]

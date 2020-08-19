@@ -1,5 +1,28 @@
 class Solution {
 public:
+    const unordered_set<char> vowels{'a', 'e', 'i', 'o', 'u',
+                                     'A', 'E', 'I', 'O', 'U'};
+    
+    string toGoatLatin(string S) {
+        string res, curr, end;
+        istringstream ss(S);
+        
+        while (ss >> curr) {
+            end += 'a';
+            
+            if (vowels.find(curr[0]) == vowels.end())
+                curr = curr.substr(1) + curr[0];
+            
+            res += curr + "ma" + end + ' ';
+        }
+        
+        res.pop_back(); // remove last space
+        return res;
+    }
+};
+
+class Solution {
+public:
     unordered_set<char> vowels = {'a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U'};
     string toGoatLatin(string s) {
         vector<char> stack = {};

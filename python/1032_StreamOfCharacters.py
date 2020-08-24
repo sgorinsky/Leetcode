@@ -7,7 +7,6 @@ class StreamChecker:
     def __init__(self, words: List[str]):
         self.trie = TrieNode()
         self.letters = deque()
-        self.max_length = 0
         for w in words:
             node = self.trie
             for i in range(len(w)-1, -1, -1):
@@ -17,12 +16,9 @@ class StreamChecker:
                 node = node.children[c]
                 
             node.word = True
-            self.max_length = max(self.max_length, len(w))
 
     def query(self, l: str) -> bool:
         self.letters.appendleft(l)
-        if len(self.letters) > self.max_length:
-            self.letters.pop()
         
         node = self.trie
         for l in self.letters:

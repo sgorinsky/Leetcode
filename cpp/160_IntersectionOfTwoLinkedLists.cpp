@@ -25,18 +25,17 @@ public:
         }
         
         curr_a = headA, curr_b = headB;
-        if (b_size >= a_size) {
-            for (int i = 0; i < b_size-a_size; ++i)
+        for (int i = 0; i < abs(b_size-a_size); ++i) {
+            if (b_size > a_size) {
                 curr_b = curr_b->next;
-        } else {
-            for (int i = 0; i < a_size-b_size; ++i)
+            } else {
                 curr_a = curr_a->next;
+            }
         }
         
-        while (curr_a && curr_b && curr_a != curr_b) {
-            curr_a = curr_a->next;
-            curr_b = curr_b->next;
-        }
+        while (curr_a && curr_b && curr_a != curr_b)
+            curr_a = curr_a->next, curr_b = curr_b->next;
+        
         return curr_a == curr_b ? curr_a : NULL;
     }
 };

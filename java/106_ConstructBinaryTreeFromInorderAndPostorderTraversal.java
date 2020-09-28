@@ -1,3 +1,24 @@
+class Solution {
+    int i, p;
+    public TreeNode buildTree(int[] inorder, int[] postorder) {
+        i = inorder.length-1;
+        p = postorder.length-1;
+        return build(Integer.MIN_VALUE, inorder, postorder);
+    }
+    
+    public TreeNode build(int stop, int[] inorder, int[] postorder) {
+        if (p < 0 || inorder[i] == stop)
+            return null;
+        
+        TreeNode root = new TreeNode(postorder[p--]);
+        root.right = build(root.val, inorder, postorder);
+        
+        i--;
+        root.left = build(stop, inorder, postorder);
+        return root;
+    }
+}
+
 /**
  * Definition for a binary tree node.
  * public class TreeNode {

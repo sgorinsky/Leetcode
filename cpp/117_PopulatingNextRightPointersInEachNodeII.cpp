@@ -14,11 +14,8 @@ public:
                     q.push_back(node->left);
                 if (node->right)
                     q.push_back(node->right);
-                
-                if (i == size - 1 || q.empty())
-                    node->next = NULL;
-                else
-                    node->next = q.front();
+             	
+		node->next = i == size - 1 ? NULL : q.front();   
             }
         }
         return root;

@@ -1,3 +1,31 @@
+class Solution {
+    public ListNode rotateRight(ListNode head, int k) {
+        if (head == null || k == 0) return head;
+        
+        ListNode curr = head, prev = null;
+        int length = 0;
+        while (curr != null) {
+            length++;
+            prev = curr;
+            curr = curr.next;
+        }
+        
+        int shift = k % length;
+        if (shift == 0) return head;
+        
+        prev.next = head;
+        curr = head;
+        while (length - 1 > shift) {
+            curr = curr.next;
+            length--;
+        }
+        
+        ListNode newHead = curr.next;
+        curr.next = null;
+        return newHead;
+    }
+}
+
 /**
  * Definition for singly-linked list.
  * public class ListNode {

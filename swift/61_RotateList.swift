@@ -1,3 +1,31 @@
+class Solution {
+    func rotateRight(_ head: ListNode?, _ k: Int) -> ListNode? {
+        if head == nil || k == 0 { return head }
+        var curr: ListNode? = head, prev: ListNode? = nil
+        var length = 0
+        
+        while curr != nil {
+            prev = curr
+            curr = curr?.next
+            length += 1
+        }
+        
+        var shift = k % length
+        if shift == 0 { return head }
+        
+        prev?.next = head
+        curr = head
+        while length - 1 > shift {
+            curr = curr?.next
+            length -= 1
+        }
+        
+        var newHead = curr?.next
+        curr?.next = nil
+        return newHead
+    }
+}
+
 /**
  * Definition for singly-linked list.
  * public class ListNode {

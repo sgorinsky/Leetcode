@@ -39,7 +39,7 @@ class Codec:
         while stack:
             curr = stack.pop()
             left = encoded_data.popleft()
-            right = encoded_data.popleft() if encoded_data else 'N'
+            right = encoded_data.popleft() 
             
             if right != 'N':
                 curr.right = TreeNode(right)

@@ -1,4 +1,42 @@
 class Codec {
+    func serialize(_ root: TreeNode?) -> String {  
+        if root == nil { return "" }
+        func serializeHelper(_ node: TreeNode?, _ str: String) -> String {
+            var currentString = str
+            if let currentNode = node {
+                currentString += String(currentNode.val)
+                currentString = serializeHelper(currentNode.left, "\(currentString),")
+                currentString = serializeHelper(currentNode.right, "\(currentString),")
+            } else {
+                currentString += "N,"
+            }
+            return currentString                   
+        }
+        return serializeHelper(root, "")
+    }
+
+    
+    func deserialize(_ data: String) -> TreeNode? {
+        if data == "" { return nil }
+        var encodedData = data.split(separator: ",")
+        var index = 0
+
+        func deserializeHelper() -> TreeNode? {
+            if encodedData[index] == "N" {
+                index += 1
+                return nil
+            }
+            var node = TreeNode(Int(encodedData[index]) as! Int)
+            index += 1
+            node.left = deserializeHelper()
+            node.right = deserializeHelper()
+            return node
+        }
+        return deserializeHelper()
+    }
+}
+
+class Codec {
     func serialize(_ root: TreeNode?) -> String {
         if root == nil { return "" }
         var serializedString = "\(root?.val as! Int)"

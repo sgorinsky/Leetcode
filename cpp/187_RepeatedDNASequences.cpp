@@ -38,3 +38,22 @@ public:
         
     }
 };
+
+class Solution {
+public:
+    vector<string> findRepeatedDnaSequences(string s) {
+        if (s.length() < 11) return {};
+        unordered_map<string, int> string_counts;
+        for (int i = 0; i <= s.length() - 10; ++i) {
+            string curr_substr = s.substr(i, 10);
+            if (string_counts.find(curr_substr) == string_counts.end()) string_counts[curr_substr] = 1;
+            else string_counts[curr_substr]++;
+        }
+        
+        vector<string> result;
+        for (auto entry : string_counts) {
+            if (entry.second > 1) result.push_back(entry.first);
+        }
+        return result;
+    }
+};

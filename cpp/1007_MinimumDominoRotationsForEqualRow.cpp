@@ -1,6 +1,27 @@
 class Solution {
 public:
     int minDominoRotations(vector<int>& A, vector<int>& B) {
+        int rotations = check_rotations(A[0], A, B);
+        return rotations != -1 || A[0] == B[0] ? rotations : check_rotations(B[0], A, B);
+    }
+    
+    int check_rotations(int target, vector<int>& A, vector<int>& B) {
+        int N = A.size();
+        int rotations_a = 0, rotations_b = 0;
+        for (int i = 0; i < N; ++i) {
+            if (A[i] != target && B[i] != target) return -1;
+            else if (A[i] == target || B[i] == target) {
+                if (B[i] != target) rotations_b++;
+                else if (A[i] != target) rotations_a++;
+            }
+        }
+        return min(rotations_a, rotations_b);
+    }
+};
+
+class Solution {
+public:
+    int minDominoRotations(vector<int>& A, vector<int>& B) {
         unordered_map<int, vector<int>> A_map, B_map;
         int N = A.size();
         for (int i = 0; i < N; ++i) {

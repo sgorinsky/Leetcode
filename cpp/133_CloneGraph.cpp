@@ -1,3 +1,34 @@
+class Solution {
+public:
+    Node* cloneGraph(Node* node) {
+        if (!node) return NULL;
+        
+        unordered_map<Node*, Node*> node_clones;
+        Node* clone = new Node(node->val);
+        node_clones[node] = clone;
+        
+        queue<Node*> q;
+        q.push(node);
+        while (!q.empty()) {
+            Node* curr = q.front();
+            Node* curr_clone = node_clones[curr];
+            q.pop();
+            
+            for (Node* nei : curr->neighbors) {
+                if (node_clones.find(nei) == node_clones.end()) {
+                    Node* clone_nei = new Node(nei->val);
+                    node_clones[nei] = clone_nei;
+                    curr_clone->neighbors.push_back(clone_nei);
+                    q.push(nei);
+                } else {
+                    curr_clone->neighbors.push_back(node_clones[nei]);
+                }
+            }
+        }
+        return clone;
+    }
+};
+
 /*
 // Definition for a Node.
 class Node {

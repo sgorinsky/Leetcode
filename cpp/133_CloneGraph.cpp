@@ -1,6 +1,38 @@
 class Solution {
 public:
     Node* cloneGraph(Node* node) {
+        if (!node) return node;
+        
+        Node* clone = new Node(node->val);
+        vector<Node*> stack = {node}, clones = {clone};
+        unordered_map<Node*, Node*> visited;
+        
+        while (!stack.empty()) {
+            Node* curr = stack.back();
+            Node* currClone = clones.back();
+            visited[curr] = currClone;
+            
+            stack.pop_back();
+            clones.pop_back();
+            for (Node* nei : curr->neighbors) {
+                if (visited.find(nei) == visited.end()) {
+                    Node* neiClone = new Node(nei->val);
+                    currClone->neighbors.push_back(neiClone);
+                    stack.push_back(nei);
+                    visited[nei] = neiClone;
+                    clones.push_back(neiClone);
+                } else {
+                    currClone->neighbors.push_back(visited[nei]);
+                }
+            }
+        }
+        return clone;
+    }
+};
+
+class Solution {
+public:
+    Node* cloneGraph(Node* node) {
         if (!node) return NULL;
         
         unordered_map<Node*, Node*> node_clones;

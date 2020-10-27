@@ -1,3 +1,21 @@
+public class Solution {
+    public ListNode detectCycle(ListNode head) {
+        ListNode tortoise = head, hare = head;
+        do {
+            if (hare == null || hare.next == null) return null;
+            tortoise = tortoise.next;
+            hare = hare.next.next;
+        } while (tortoise != hare);
+        
+        tortoise = head;
+        while (tortoise != hare) {
+            hare = hare.next;
+            tortoise = tortoise.next;
+        }
+        return hare;
+    }
+}
+
 /**
  * Definition for singly-linked list.
  * class ListNode {

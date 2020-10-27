@@ -1,3 +1,23 @@
+class Solution {
+public:
+    ListNode *detectCycle(ListNode *head) {
+        ListNode* tortoise = head;
+        ListNode* hare = head;
+        do {
+            if (!hare || !hare->next) return NULL;
+            tortoise = tortoise->next;
+            hare = hare->next->next;
+        } while (tortoise != hare);
+        
+        tortoise = head;
+        while (tortoise != hare) {
+            tortoise = tortoise->next;
+            hare = hare->next;
+        }
+        return hare;
+    }
+};
+
 /**
  * Definition for singly-linked list.
  * struct ListNode {

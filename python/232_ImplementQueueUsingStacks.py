@@ -1,5 +1,48 @@
-<<<<<<< HEAD
-=======
+class MyQueue:
+
+    def __init__(self):
+        """
+        Initialize your data structure here.
+        """
+        self.stack, self.head, self.back = [], 0, -1
+
+    def push(self, x: int) -> None:
+        """
+        Push element x to the back of queue.
+        """
+        self.stack.append(x)
+        self.back += 1
+        
+
+    def pop(self) -> int:
+        """
+        Removes the element from in front of queue and returns that element.
+        """
+        temp = self.head
+        self.head += 1
+        return self.stack[temp]
+
+    def peek(self) -> int:
+        """
+        Get the front element.
+        """
+        return self.stack[self.head]
+
+    def empty(self) -> bool:
+        """
+        Returns whether the queue is empty.
+        """
+        return self.head > self.back
+
+
+# Your MyQueue object will be instantiated and called as such:
+# obj = MyQueue()
+# obj.push(x)
+# param_2 = obj.pop()
+# param_3 = obj.peek()
+# param_4 = obj.empty()
+
+
 # iterating for pop without built in python slicing
 class MyQueue:
     def __init__(self):

@@ -16,17 +16,16 @@ public:
             int i = curr_indices[0], j = curr_indices[1];
             for (vector<int> direction : directions) {
                 int r = i + direction[0], c = j + direction[1];
-                if (can_go(image, r, c, start_color) && visited[r][c] != -1) {
+                if (can_go(image, r, c, newColor, start_color)) {
                     image[r][c] = newColor;
                     q.push_front({r, c});
-                    visited[r][c] = -1;
                 }
             }
         }
         return image;
     }
     
-    bool can_go(vector<vector<int>>& image, int i, int j, int start_color) {
-        return i >= 0 && i < image.size() && j >= 0 && j < image[0].size() && image[i][j] == start_color;
+    bool can_go(vector<vector<int>>& image, int i, int j, int new_color, int start_color) {
+        return i >= 0 && i < image.size() && j >= 0 && j < image[0].size() && image[i][j] != new_color && image[i][j] == start_color;
     }
 };

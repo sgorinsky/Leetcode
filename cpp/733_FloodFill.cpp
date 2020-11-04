@@ -5,10 +5,10 @@ public:
         deque<vector<int>> q;
         q.push_front({sr, sc});
         
+        vector<vector<int>> visited = image;
         int start_color = image[sr][sc];
-        if (image[sr][sc] == 0) return image;
         image[sr][sc] = newColor;
-        
+        visited[sr][sc] = -1;
         while (!q.empty()) {
             vector<int> curr_indices = q.front();
             q.pop_front();
@@ -16,9 +16,10 @@ public:
             int i = curr_indices[0], j = curr_indices[1];
             for (vector<int> direction : directions) {
                 int r = i + direction[0], c = j + direction[1];
-                if (can_go(image, r, c, start_color)) {
+                if (can_go(image, r, c, start_color) && visited[r][c] != -1) {
                     image[r][c] = newColor;
                     q.push_front({r, c});
+                    visited[r][c] = -1;
                 }
             }
         }
@@ -26,6 +27,6 @@ public:
     }
     
     bool can_go(vector<vector<int>>& image, int i, int j, int start_color) {
-        return i >= 0 && i < image.size() && j >= 0 && j < image[0].size() && image[i][j] > 0 && image[i][j] == start_color ;
+        return i >= 0 && i < image.size() && j >= 0 && j < image[0].size() && image[i][j] == start_color;
     }
 };

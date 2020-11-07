@@ -12,7 +12,6 @@
 class Solution {
 public:
     bool isValidBST(TreeNode* root) {
-        if (!root || (!root->left && !root->right)) return true;
         return validate_bst(root, NULL, NULL);
     }
     

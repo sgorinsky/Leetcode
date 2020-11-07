@@ -17,29 +17,9 @@ public:
     }
     
     bool validate_bst(TreeNode* root, TreeNode* lesser_grandparent, TreeNode* greater_grandparent) {
+        if (!root) return true;
+        else if ((lesser_grandparent && root->val <= lesser_grandparent->val) || (greater_grandparent && root->val >= greater_grandparent->val)) return false;
         
-        if ((lesser_grandparent && root->val <= lesser_grandparent->val) || (greater_grandparent && root->val >= greater_grandparent->val)) {
-            return false;
-        }
-        
-        bool left = true;
-        if (root->left) {
-            if (root->val > root->left->val) {
-                left = validate_bst(root->left, lesser_grandparent, root);
-            } else  {
-                 return false;
-            }
-        }
-        
-        bool right = true;
-        if (root->right) {
-            if (root->val < root->right->val) {
-                right = validate_bst(root->right, root, greater_grandparent);
-            } else {
-                return false;
-            }
-        }
-        
-        return left && right;
+        return validate_bst(root->left, lesser_grandparent, root) && validate_bst(root->right, root, greater_grandparent);
     }
 };

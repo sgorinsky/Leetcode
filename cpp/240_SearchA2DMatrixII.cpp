@@ -1,5 +1,27 @@
 class Solution {
 public:
+    bool searchMatrix(vector<vector<int>>& matrix, int target) {
+        for (vector<int> row : matrix) {
+            if (binarySearch(row, target))
+                return true;
+        }
+        return false;
+    }
+    
+    bool binarySearch(vector<int>& row, int target) {
+        int left = 0, right = row.size() - 1;
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            if (row[mid] == target) return true;
+            else if (row[mid] > target) right = mid - 1;
+            else left = mid + 1;
+        }
+        return false;
+    }
+};
+
+class Solution {
+public:
     
     bool searchMatrix(vector<vector<int>>& matrix, int target) {
         if (matrix.empty() || matrix.size() == 0) return false;

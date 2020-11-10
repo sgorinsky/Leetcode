@@ -1,5 +1,24 @@
 class Solution:
     def searchMatrix(self, matrix, target):
+        def binarySearch(row):
+            left, right = 0, len(row) - 1
+            
+            while left <= right:
+                mid = (left + right) >> 1
+                if row[mid] == target: return True
+                elif row[mid] > target: right = mid - 1
+                else: left = mid + 1
+            
+            return False
+        
+        for row in matrix:
+            if binarySearch(row):
+                return True
+            
+        return False
+
+class Solution:
+    def searchMatrix(self, matrix, target):
         """
         :type matrix: List[List[int]]
         :type target: int

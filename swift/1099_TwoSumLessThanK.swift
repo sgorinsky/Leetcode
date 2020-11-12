@@ -6,10 +6,10 @@ class Solution {
         var left = 0, right = sortedNums.count - 1
         while left < right {
             var candidateSum = sortedNums[left] + sortedNums[right]
-            if candidateSum > K {
+            if candidateSum >= K {
                 right -= 1
             } else {
-                if candidateSum < K { closestSum = max(candidateSum, closestSum) }
+                closestSum = max(candidateSum, closestSum)
                 left += 1
             }
         }

@@ -1,3 +1,22 @@
+class Solution {
+    public Node connect(Node root) {
+        if (root == null) return root;
+        Queue<Node> q = new LinkedList<Node>() {{
+            add(root);
+        }};
+        while (!q.isEmpty()) {
+            int sz = q.size();
+            for (int i = 0; i < sz; ++i) {
+                Node curr = q.poll();
+                if (curr.left != null) q.add(curr.left);
+                if (curr.right != null) q.add(curr.right);
+                if (i < sz - 1) curr.next = q.peek();
+            }
+        }
+        return root;
+    }
+}
+
 /*
 // Definition for a Node.
 class Node {

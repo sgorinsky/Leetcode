@@ -36,7 +36,7 @@ class Solution {
                                 }
                             }
                         }
-                        return checkIfComplete
+                       return false
                     }
                 }
             }

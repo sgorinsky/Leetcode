@@ -1,6 +1,30 @@
 class Solution {
 public:
     vector<vector<int>> merge(vector<vector<int>>& intervals) {
+        if (intervals.empty()) return {};
+        
+        sort(intervals.begin(), intervals.end(), [](const vector<int>& a, const vector<int>& b) {
+            return a[0] == b[0] ? a[1] > b[1] : a[0] < b[0];
+        });
+            
+        vector<vector<int>> merged_intervals;
+        vector<int> curr = {intervals[0][0], intervals[0][1]};
+        for (int i = 1; i < intervals.size(); ++i) {
+            if (curr[1] >= intervals[i][0]) {
+                curr = {curr[0], max(curr[1], intervals[i][1])};
+            } else {
+                merged_intervals.push_back(curr);
+                curr = intervals[i];
+            }
+        }
+        merged_intervals.push_back(curr);
+        return merged_intervals;
+    }
+};
+
+class Solution {
+public:
+    vector<vector<int>> merge(vector<vector<int>>& intervals) {
         if (intervals.size() == 0) return {};
         vector<vector<int>> res;
         vector<int> curr_range;

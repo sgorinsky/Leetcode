@@ -1,4 +1,35 @@
 class Solution {
+    var digits: Set<Character> = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
+    func decodeString(_ s: String) -> String {
+        var stack = [Character]()
+        for c in s {
+            if c != "]" {
+                stack.append(c)
+            } else {
+                var currentString = [Character]()
+                while !stack.isEmpty && stack.last! != "[" {
+                    currentString.append(stack.removeLast())
+                }
+                stack.removeLast()
+                
+                var numRepeats = 0, base = 1
+                while !stack.isEmpty && digits.contains(stack.last!) {
+                    numRepeats += Int(String(stack.removeLast()))! * base
+                    base *= 10
+                }
+                
+                for i in 0..<numRepeats {
+                    for (idx, c) in currentString.enumerated().reversed() {
+                        stack.append(c)
+                    }
+                }
+            }
+        }
+        return String(stack)
+    }
+}
+
+class Solution {
     func decodeString(_ s: String) -> String {
         var stack = [String]()
         var idx = s.startIndex

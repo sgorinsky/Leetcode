@@ -11,7 +11,7 @@ public:
         vector<int> curr = {intervals[0][0], intervals[0][1]};
         for (int i = 1; i < intervals.size(); ++i) {
             if (curr[1] >= intervals[i][0]) {
-                curr = {curr[0], max(curr[1], intervals[i][1])};
+                curr[1] = max(curr[1], intervals[i][1]);
             } else {
                 merged_intervals.push_back(curr);
                 curr = intervals[i];

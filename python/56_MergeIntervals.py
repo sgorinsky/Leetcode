@@ -1,5 +1,21 @@
 class Solution:
     def merge(self, intervals: List[List[int]]) -> List[List[int]]:
+        if not intervals: return []
+        
+        sorted_intervals = sorted(intervals, key = lambda x: x[0])
+        curr, merged = sorted_intervals[0], []
+        for i in range(1, len(sorted_intervals)):
+            if curr[1] >= sorted_intervals[i][0]:
+                curr[1] = max(curr[1], sorted_intervals[i][1])
+            else:
+                merged.append(curr)
+                curr = sorted_intervals[i]
+        
+        merged.append(curr)
+        return merged
+
+class Solution:
+    def merge(self, intervals: List[List[int]]) -> List[List[int]]:
         if not intervals or not intervals[0]:
             return []
         

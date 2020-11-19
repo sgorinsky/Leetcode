@@ -1,4 +1,30 @@
 class Solution {
+    public int[][] merge(int[][] intervals) {
+        if (intervals.length == 0) return new int[0][0];
+        
+        Arrays.sort(intervals, new Comparator<int[]>() {
+            @Override
+            public int compare(int[] a, int[] b) {
+              return a[0] < b[0] ? -1 : a[0] == b[0] ? 0 : 1;
+            }
+          });
+        
+        List<int[]> results = new LinkedList<int[]>();
+        int[] currentInterval = intervals[0];
+        for (int i = 1; i < intervals.length; ++i) {
+            if (currentInterval[1] >= intervals[i][0]) {
+                currentInterval[1] = Math.max(currentInterval[1], intervals[i][1]);
+            } else {
+                results.add(currentInterval);
+                currentInterval = intervals[i];
+            }
+        }
+        results.add(currentInterval);
+        return results.toArray(new int[results.size()][2]);
+    }
+}
+
+class Solution {
   private class IntervalComparator implements Comparator<int[]> {
     @Override
     public int compare(int[] a, int[] b) {

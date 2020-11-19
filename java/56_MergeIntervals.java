@@ -5,7 +5,7 @@ class Solution {
         Arrays.sort(intervals, new Comparator<int[]>() {
             @Override
             public int compare(int[] a, int[] b) {
-              return a[0] < b[0] ? -1 : a[0] == b[0] ? 0 : 1;
+              return a[0] - b[0];
             }
           });
         

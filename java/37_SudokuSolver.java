@@ -1,39 +1,28 @@
-class Solution {
-    public void solveSudoku(char[][] board) {
-        backtrack(board);
-    }
-    
-    public boolean isValidCandidate(char[][] board, char candidate, int row, int col) {
-        int rowInBox = row / 3 * 3;
-        int colInBox = col / 3 * 3;
+class Solution:
+    def solveSudoku(self, board: List[List[str]]) -> None:
+        """
+        Do not return anything, modify board in-place instead.
+        """
+        def valid_candidate(cand, row, col):
+            for i in range(9):
+                if row != i and board[i][col] == cand: return False
+                if col != i and board[row][i] == cand: return False
+                
+                box_row = row // 3 * 3 + i // 3
+                box_col = col // 3 * 3 + i % 3
+                if (row != box_row and col != box_col) and board[box_row][box_col] == cand: return False
+            return True
         
-        for (int i = 0; i < 9; ++i) {
-            if (row != i && board[i][col] == candidate) return false;
-            if (col != i && board[row][i] == candidate) return false;
-            if ((rowInBox != row && colInBox != col) && board[rowInBox][colInBox] == candidate) return false;
-            
-            rowInBox = row / 3 * 3 + i / 3;
-            colInBox = col / 3 * 3 + i % 3;
-        }
-        return true;
-    }
-    
-    public boolean backtrack(char[][] board) {
-        for (int i = 0; i < 9; ++i) {
-            for (int j = 0; j < 9; ++j) {
-                if (board[i][j] == '.') {
-                    for (int n = 1; n <= 9; ++n) {
-                        char candidate = (char) (n + '0');
-                        if (isValidCandidate(board, candidate, i, j)) {
-                            board[i][j] = candidate;
-                            if (backtrack(board)) return true;
-                            board[i][j] = '.';
-                        }
-                    }
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
-}
+        def solve():
+            for i in range(9):
+                for j in range(9):
+                    if board[i][j] == '.':
+                        for n in range(1, 10):
+                            if valid_candidate(str(n), i, j):
+                                board[i][j] = str(n)
+                                if solve(): return True
+                                board[i][j] = '.'
+                        return False
+            return True
+        
+        solve()

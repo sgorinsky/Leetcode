@@ -15,13 +15,13 @@
  */
 class Solution {
     func rob(_ root: TreeNode?) -> Int {
-        func helper(_ root: TreeNode?, _ robbed: Int, _ notRobbed: Int) -> [Int] {
+        func helper(_ root: TreeNode?) -> [Int] {
             if root == nil { 
                 return [0, 0]
             }
             
-            var left = helper(root?.left, robbed, notRobbed)
-            var right = helper(root?.right, robbed, notRobbed)
+            var left = helper(root?.left)
+            var right = helper(root?.right)
             
             var rob = left[1] + right[1] + root!.val
             var notRob = max(left[0], left[1]) + max(right[0], right[1])
@@ -29,7 +29,7 @@ class Solution {
             return [rob, notRob]
         }
         
-        var result = helper(root, 0, 0)
+        var result = helper(root)
         return max(result[0], result[1])
     }
 }

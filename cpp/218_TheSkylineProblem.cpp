@@ -1,4 +1,34 @@
 class Solution {
+    struct compare {
+        bool operator()(const vector<int> a, const vector<int> b) const { // const must be here
+            return a[0] != b[0] ? a[0] < b[0] : a[2] < b[2];
+        }
+    };
+public:
+    vector<vector<int>> getSkyline(vector<vector<int>>& buildings) {
+        vector<vector<int>> skyline;
+        // https://stackoverflow.com/questions/2620862/using-custom-stdset-comparator#2620889
+        set<vector<int>, compare> pq = {{-1, -1, 0}};
+        int N = buildings.size();
+        for (int i = 0; i < N; ++i) {
+            vector<int> b = buildings[i];
+            const vector<int>& top = *pq.rbegin();
+            if (b[0] > top[1] || b[2] > top[2]) {
+                pq.push(b);
+            } else if (b[0] == top[1]) {
+                
+            }
+        }
+        // for (const vector<int>& v : pq) {
+        //     for (int n : v) {
+        //         cout << n << endl;
+        //     }
+        // }
+        return skyline;
+    }
+};
+
+class Solution {
 public:
     vector<vector<int>> getSkyline(vector<vector<int>>& buildings) {
         vector<vector<int>> crit_points;

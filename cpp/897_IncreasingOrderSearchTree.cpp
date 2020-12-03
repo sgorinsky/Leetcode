@@ -1,3 +1,24 @@
+class Solution {
+public:
+    TreeNode* curr;
+    TreeNode* increasingBST(TreeNode* root) {
+        TreeNode* ans = new TreeNode(0);
+        curr = ans;
+        inorder(root);
+        return ans->right;
+    }
+    
+    void inorder(TreeNode* root) {
+        if (!root) return;
+        
+        inorder(root->left);
+        root->left = NULL;
+        curr->right = root;
+        curr = root;
+        inorder(root->right);
+    }
+};
+
 /**
  * Definition for a binary tree node.
  * struct TreeNode {

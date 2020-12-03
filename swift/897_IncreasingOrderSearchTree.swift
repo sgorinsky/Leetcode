@@ -10,13 +10,11 @@ class Solution {
             }
             root = stack.removeLast()
             if head == nil {
-                head = root
                 curr = root
-            } else if let currentNode = curr {
-                if currentNode.val < root!.val {
-                    curr?.right = root
-                    curr = root
-                }
+                head = root
+            } else if curr != nil {
+                curr?.right = root
+                curr = root
             }
             curr?.left = nil
             root = root?.right

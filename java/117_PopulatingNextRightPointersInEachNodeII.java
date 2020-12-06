@@ -1,4 +1,34 @@
 class Solution {
+    Node prev, leftmost;
+    public Node connect(Node root) {
+        if (root == null) return root;
+        leftmost = root;
+        Node curr;
+        while (leftmost != null) {
+            curr = leftmost;
+            prev = leftmost = null;
+            while (curr != null) {
+                processChild(curr.left);
+                processChild(curr.right);
+                curr = curr.next;
+            }
+        }
+        return root;
+    }
+    
+    public void processChild(Node child) {
+        if (child != null) {
+            if (prev != null) {
+                prev.next = child;
+            } else {
+                leftmost = child;
+            }
+            prev = child;
+        }
+    }
+}
+
+class Solution {
     public Node connect(Node root) {
         if (root == null)
             return null;

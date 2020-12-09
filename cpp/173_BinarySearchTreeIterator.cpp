@@ -1,3 +1,29 @@
+class BSTIterator {
+public:
+    deque<int> nodes;
+    BSTIterator(TreeNode* root) {
+        populate_inorder(root);
+    }
+    
+    void populate_inorder(TreeNode* root){
+        if (!root) return;
+        populate_inorder(root->left);
+        nodes.push_back(root->val);
+        populate_inorder(root->right);
+    }
+    
+    int next() {
+        if (nodes.empty()) return -1;
+        int node = nodes.front();
+        nodes.pop_front();
+        return node;
+    }
+    
+    bool hasNext() {
+        return !nodes.empty();
+    }
+};
+
 /**
  * Definition for a binary tree node.
  * struct TreeNode {

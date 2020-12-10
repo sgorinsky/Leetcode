@@ -1,5 +1,22 @@
 class Solution {
 public:
+    bool validMountainArray(vector<int>& arr) {
+        if (arr.size() < 3 || arr[0] > arr[1]) return false;
+        bool increasing = true;
+        for (int i = 0; i < arr.size() - 1; ++i) {
+            if (arr[i] == arr[i + 1]) return false;
+            if (increasing) {
+                if (arr[i] > arr[i + 1]) increasing = false;
+            } else {
+                if (arr[i] <= arr[i + 1]) return false;
+            }
+        }
+        return !increasing;
+    }
+};
+
+class Solution {
+public:
     bool validMountainArray(vector<int>& A) {
         int N = A.size();
         if (N <= 2) 

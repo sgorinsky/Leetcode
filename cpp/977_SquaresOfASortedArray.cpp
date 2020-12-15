@@ -1,5 +1,17 @@
 class Solution {
 public:
+    vector<int> sortedSquares(vector<int>& nums) {
+        vector<int> res(nums.size());
+        int start = 0, end = nums.size() - 1, i = end;
+        while (start <= end) {
+            res[i--] = abs(nums[start]) > abs(nums[end]) ? nums[start] * nums[start++] : nums[end] * nums[end--];
+        }
+        return res;
+    }
+};
+
+class Solution {
+public:
     vector<int> sortedSquares(vector<int>& A) {
         vector<int> neg_stack;
         int idx = 0; 

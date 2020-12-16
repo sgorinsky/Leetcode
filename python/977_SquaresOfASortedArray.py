@@ -1,4 +1,18 @@
 class Solution:
+    def sortedSquares(self, nums: List[int]) -> List[int]:
+        start, end, i = 0, len(nums) - 1, len(nums) - 1
+        res = [0 for _ in range(len(nums))]
+        while start <= end:
+            if abs(nums[start]) > abs(nums[end]):
+                res[i] = nums[start] * nums[start]
+                start += 1
+            else:
+                res[i] = nums[end] * nums[end]
+                end -= 1
+            i -= 1
+        return res
+
+class Solution:
     def sortedSquares(self, A: List[int]) -> List[int]:
         idx, neg_squares = 0, []
         while idx < len(A) and A[idx] < 0:

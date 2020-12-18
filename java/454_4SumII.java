@@ -1,5 +1,22 @@
 class Solution {
     public int fourSumCount(int[] A, int[] B, int[] C, int[] D) {
+        HashMap<Integer, Integer> sums = new HashMap<Integer, Integer>();
+        for (int a : A) {
+            for (int b : B)
+                sums.put(a + b, sums.getOrDefault(a + b, 0) + 1);
+        }
+        
+        int count = 0;
+        for (int c : C) {
+            for (int d : D)
+                count += sums.getOrDefault(-(c + d), 0);
+        }
+        return count;
+    }
+}
+
+class Solution {
+    public int fourSumCount(int[] A, int[] B, int[] C, int[] D) {
         int[][] arrs = {A, B, C, D};
         HashMap<Integer, Integer> sums = new HashMap<Integer, Integer>();
         HashMap<Integer, Integer> nextSums;

@@ -7,8 +7,10 @@ public:
             else {
                 for (int i = 0; i < subseq.size(); ++i) {
                     if ((n < subseq[i] && i == 0) || 
-                        (n < subseq[i] && n > subseq[i-1]))
+                        (n < subseq[i] && n > subseq[i-1])) {
                         subseq[i] = n;
+                        break;
+                    }
                 }
             }
         }

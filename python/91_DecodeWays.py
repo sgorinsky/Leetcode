@@ -1,4 +1,20 @@
 class Solution:
+    def numDecodings(self, s: str) -> int:
+        def helper(head):
+            if head in cache: return cache[head]
+            elif head == len(s): return 1
+            elif head > len(s) or s[head] == '0': return 0
+            
+            cache[head] = helper(head + 1)
+            if head + 2 <= len(s):
+                n = int(s[head:head+2])
+                if 1 <= n <= 26:
+                    cache[head] += helper(head + 2)
+            return cache[head]
+        cache = {}
+        return helper(0)
+
+class Solution:
     letter_values = {}
     for i in range(1, 27): letter_values[str(i)] = chr(64+i)
     

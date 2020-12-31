@@ -1,7 +1,6 @@
 class Solution {
 public:
     int lengthOfLongestSubstringKDistinct(string s, int k) {
-        if (k == 0) return 0;
         int high = 0, count = 0, distinct = 0, trail = 0;
         vector<int> letters(126, 0);
         for (int i = 0; i < s.size(); ++i) {

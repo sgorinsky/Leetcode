@@ -1,6 +1,28 @@
 class Solution {
 public:
     int lengthOfLongestSubstringKDistinct(string s, int k) {
+        if (k == 0) return 0;
+        int high = 0, count = 0, distinct = 0, trail = 0;
+        vector<int> letters(126, 0);
+        for (int i = 0; i < s.size(); ++i) {
+            count++;
+            if (++letters[s[i]] == 1) distinct++;
+            if (distinct > k) {
+                while (trail <= i && distinct > k) {
+                    letters[s[trail]]--;
+                    if (letters[s[trail++]] == 0) distinct--;
+                    count--;
+                }
+            }
+            high = max(count, high);
+        }
+        return high;
+    }
+};
+
+class Solution {
+public:
+    int lengthOfLongestSubstringKDistinct(string s, int k) {
         if (s.length()*k == 0) return 0;
         
         unordered_map<int, int> let_counts;

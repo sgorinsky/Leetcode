@@ -2,9 +2,8 @@ class Solution {
 public:
     int count = 0;
     int countArrangement(int n) {
-        const int N = n;
-        bool used[N + 1];
-        memset(used, false, N + 1);
+        bool used[n + 1];
+        memset(used, false, n + 1);
         return backtrack(n, 1, used);
     }
     

@@ -1,5 +1,16 @@
 class Solution:
     def lengthOfLongestSubstring(self, s: str) -> int:
+        letters = [-1] * 128
+        high = idx = 0
+        for i, c in enumerate(s):
+            if letters[ord(c)] >= 0:
+                idx = max(letters[ord(c)] + 1, idx)
+            high = max(i - idx + 1, high)
+            letters[ord(c)] = i
+        return high
+
+class Solution:
+    def lengthOfLongestSubstring(self, s: str) -> int:
         
         start = high = count = 0
         letters = {}

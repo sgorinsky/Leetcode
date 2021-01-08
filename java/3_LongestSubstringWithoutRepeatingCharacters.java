@@ -1,6 +1,23 @@
 class Solution {
     public int lengthOfLongestSubstring(String s) {
         int[] letters = new int[128];
+        int high = 0, idx = 0;
+        for (int i = 0; i < s.length(); ++i) {
+            char c = s.charAt(i);
+            letters[c]++;
+            if (letters[c] > 1) {
+                while (letters[c] > 1)
+                    letters[s.charAt(idx++)]--;
+            }
+            high = Math.max(high, i - idx + 1);
+        }
+        return high;
+    }
+}
+
+class Solution {
+    public int lengthOfLongestSubstring(String s) {
+        int[] letters = new int[128];
         Arrays.fill(letters, -1);
         int high = 0, idx = 0;
         for (int i = 0; i < s.length(); ++i) {

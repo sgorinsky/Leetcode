@@ -2,6 +2,22 @@ class Solution {
 public:
     int lengthOfLongestSubstring(string s) {
         int high = 0, idx = 0;
+        int letters[128];
+        fill_n(letters, 128, -1);
+        for (int i = 0; i < s.length(); ++i) {
+            if (letters[s[i]] >= 0)
+                idx = max(idx, letters[s[i]] + 1);
+            letters[s[i]] = i;
+            high = max(high, i - idx + 1);
+        }
+        return high;
+    }
+};
+
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+        int high = 0, idx = 0;
         int letters[128] = {};
         for (int i = 0; i < s.length(); ++i) {
             if (++letters[s[i]] > 1) {

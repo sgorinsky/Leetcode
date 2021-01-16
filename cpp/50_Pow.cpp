@@ -8,12 +8,11 @@ public:
         }
         
         double ans = 1;
-        double curr = x;
         for (long long i = N; i > 0; i /= 2) {
             if (i % 2 == 1) {
-                ans *= curr;
+                ans *= x;
             }
-            curr *= curr;
+            x *= x;
         }
         return ans;
     }

@@ -1,18 +1,31 @@
 class Solution {
 public:
-    bool canFormArray(vector<int>& arr, vector<vector<int>>& pieces) {
-        if (pieces.empty()) return arr.empty();
-        else if (arr.empty()) return pieces.empty();
+    int countVowelStrings(int n) {
+        return countPermutations(n, 0, 0);
+    }
+    
+    int countPermutations(int n, int start, int k) {
+        if (k == n)  return 1;
         
-        unordered_map<int, int> orders;
-        for (int i = 0; i < arr.size(); ++i)
-            orders[arr[i]] = i;
+        int count = 0;
+        for (int i = start; i < 5; ++i)
+            count += countPermutations(n, i, k + 1);
         
-        for (vector<int> row : pieces) {
-            for (int i = 0; i < row.size() - 1; ++ i) {
-                if (orders.find(row[i]) == orders.end() || orders[row[i+1]] - 1 != orders[row[i]]) return false;
+        return count;
+    }
+};
+
+class Solution {
+public:
+    int countVowelStrings(int n) {
+        vector<vector<int>> dp;
+        for (int i = 0; i <= n; ++i) dp.push_back({1, 1, 1, 1, 1});
+        
+        for (int i = 1; i <= n; ++i) {
+            for (int j = 1; j < 5; ++j) {
+                dp[i][j] = dp[i][j-1] + dp[i-1][j];
             }
         }
-        return true;
+        return dp[n][4];
     }
 };

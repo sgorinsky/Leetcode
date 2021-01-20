@@ -1,5 +1,25 @@
 class Solution {
 public:
+    bool isValid(string s) {
+        vector<char> stack;
+        unordered_map<char, char> end_parens = { {')', '('}, {']', '['}, {'}', '{'} };
+        for (char c : s) {
+            if (end_parens.find(c) == end_parens.end()) {
+                stack.push_back(c);
+            } else {
+                if (stack.empty() || end_parens[c] != stack.back()) {
+                    return false;
+                } else {
+                    stack.pop_back();
+                }
+            }
+        }
+        return stack.empty();
+    }
+};
+
+class Solution {
+public:
     unordered_map<char, char> close_parens = {
         {')', '('},
         {']', '['},

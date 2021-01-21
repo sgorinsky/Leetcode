@@ -1,5 +1,21 @@
 class Solution {
     public int[] mostCompetitive(int[] nums, int k) {
+        Stack<Integer> stack = new Stack<Integer>();
+        for (int i = 0; i < nums.length; ++i) {
+            while (!stack.isEmpty() && stack.peek() > nums[i] && nums.length - 1 - i >= k - stack.size()) stack.pop();
+            stack.push(nums[i]);
+        }
+        
+        int[] res = new int[k];
+        for (int i = 0; i < k; ++i)
+            res[i] = stack.get(i);
+        
+        return res;
+    }
+}
+
+class Solution {
+    public int[] mostCompetitive(int[] nums, int k) {
         int N = nums.length;
         List<Integer> stack = new ArrayList<Integer>();
         for (int i = 0; i < N; ++i) {

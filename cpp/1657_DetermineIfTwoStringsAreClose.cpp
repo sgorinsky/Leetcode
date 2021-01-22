@@ -1,6 +1,37 @@
 class Solution {
 public:
     bool closeStrings(string word1, string word2) {
+        if (word1.length() != word2.length())
+            return false;
+        
+        int letters1[26] = {0};
+        int letters2[26] = {0};
+        for (int i = 0; i < word1.length(); ++i) {
+            letters1[word1[i] - 'a'] += 1;
+            letters2[word2[i] - 'a'] += 1;
+        }
+        
+        for (int i = 0; i < 26; ++i) {
+            if ((letters1[i] > 0 || letters2[i] > 0) && 
+                (letters1[i] == 0 || letters2[i] == 0))
+                    return false;
+        }
+        
+        sort(letters1, letters1 + 26);
+        sort(letters2, letters2 + 26);
+        
+        for (int i = 0; i < 26; ++i) {
+            if (letters1[i] != letters2[i])
+                return false;
+        }
+        
+        return true;
+    }
+};
+
+class Solution {
+public:
+    bool closeStrings(string word1, string word2) {
         if (word1.length() != word2.length()) return false;
         unordered_map<char, int> letter1_counts;
         unordered_map<char, int> letter2_counts;

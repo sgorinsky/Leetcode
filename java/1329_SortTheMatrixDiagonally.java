@@ -10,7 +10,7 @@ class Solution {
     }
     
     public void storeAndSortDiagonal(int[][] mat, int row, int col) {
-        PriorityQueue<Integer> pq = new PriorityQueue<Integer>();
+        PriorityQueue<Integer> pq = new PriorityQueue<Integer>((a, b) -> a - b);
         
         int i = row, j = col;
         while (i < mat.length && j < mat[0].length) 

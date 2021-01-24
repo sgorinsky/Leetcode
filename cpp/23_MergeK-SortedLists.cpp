@@ -1,3 +1,34 @@
+class Solution {
+public:
+    ListNode* mergeKLists(vector<ListNode*>& lists) {
+        auto compare = [](pair<int, int> a, pair<int, int> b) {
+          return a.first > b.first;  
+        };
+        
+        priority_queue<pair<int, int>, vector<pair<int, int>>, decltype(compare)> pq(compare);
+        int k = lists.size();
+        for (int i = 0; i < k; ++i) {
+            if (lists[i])
+                pq.push({lists[i]->val, i});
+        }
+        
+        ListNode* sentinel = new ListNode(0);
+        ListNode* curr = sentinel;
+        while (!pq.empty()) {
+            pair<int, int> cand = pq.top();
+            pq.pop();
+            int val = cand.first, idx = cand.second;
+            curr->next = new ListNode(val);
+            curr = curr->next;
+            if (lists[idx]->next) {
+                lists[idx] = lists[idx]->next;
+                pq.push({lists[idx]->val, idx});
+            }
+        }
+        return sentinel->next;
+    }
+};
+
 /**
  * Definition for singly-linked list.
  * struct ListNode {

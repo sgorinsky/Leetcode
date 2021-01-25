@@ -1,5 +1,30 @@
 class Solution {
     public ListNode mergeKLists(ListNode[] lists) {
+        PriorityQueue<int[]> pq = new PriorityQueue<int[]>((a, b) -> a[0] - b[0]);
+        ListNode sentinel = new ListNode(0);
+        ListNode curr = sentinel;
+        
+        for (int i = 0; i < lists.length; ++i) {
+            if (lists[i] != null)
+                pq.add(new int[]{lists[i].val, i});
+        }
+        
+        while (!pq.isEmpty()) {
+            int[] pair = pq.poll();
+            int val = pair[0], i = pair[1];
+            curr.next = new ListNode(val);
+            curr = curr.next;
+            if (lists[i].next != null) {
+                lists[i] = lists[i].next;
+                pq.add(new int[]{lists[i].val, i});
+            }
+        }
+        return sentinel.next;
+    }
+}
+
+class Solution {
+    public ListNode mergeKLists(ListNode[] lists) {
         if (lists.length == 0) 
             return null;
         

@@ -1,3 +1,20 @@
+class Solution:
+    def mergeKLists(self, lists: List[ListNode]) -> ListNode:
+        vals = []
+        for node in lists:
+            while node:
+                vals.append(node.val)
+                node = node.next
+        
+        vals.sort()
+        sentinel = ListNode(0)
+        curr = sentinel
+        for val in vals:
+            curr.next = ListNode(val)
+            curr = curr.next
+        
+        return sentinel.next
+
 # Definition for singly-linked list.
 # class ListNode:
 #     def __init__(self, val=0, next=None):

@@ -3,6 +3,20 @@ public:
     int mod = 1000000007;
     int concatenatedBinary(int n) {
         long x = 0;
+        int shift = 0;
+        for (int i = 1; i <= n; ++i) {
+            if ((i & (i - 1)) == 0) shift++;
+            x = ((x << shift) | i) % mod;
+        }
+        return x;
+    }
+};
+
+class Solution {
+public:
+    int mod = 1000000007;
+    int concatenatedBinary(int n) {
+        long x = 0;
         int shift = 0, val = 1;
         for (int i = 1; i <= n; ++i) {
             if (i == val) {

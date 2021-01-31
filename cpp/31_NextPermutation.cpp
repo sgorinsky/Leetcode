@@ -17,20 +17,22 @@ public:
             }
         }
         
-        if (start >= 0) {
-            int temp = nums[start];
-            nums[start] = nums[end];
-            nums[end] = temp;
-        }
+        if (start >= 0)
+            swap(nums, start, end);
         
         reverse(nums, start + 1, N - 1);
     }
     
+    void swap(vector<int>& nums, int i, int j) {
+        int temp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = temp;
+    }
+    
     void reverse(vector<int>& nums, int i, int j) {
         while (i <= j) {
-            int temp = nums[i];
-            nums[i++] = nums[j];
-            nums[j--] = temp;
+            swap(nums, i, j);
+            i++, j--;
         }
     }
 };
